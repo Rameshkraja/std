@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Post Method Form</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Post Method Form</h1>
+	<a href="load.php">Show Data</a>
+	<form id="post-form" method="POST">
+		<label for="username">Username:</label>
+		<input type="text" name="username" required><br>
+
+		<label for="college">College Name:</label>
+		<input type="text" name="college" required><br>
+		<button onclick="location.href='load.php'">submit</button>
+
+	</form>
+	
+	<script>
+		$(document).ready(function() {
+			$('#post-form').submit(function(event) {
+				event.preventDefault();
+				$.ajax({
+					url: 'csv.php',
+					type: 'POST',
+					data: $('#post-form').serialize(),
+					//console.log(data),
+					success: function(data) {
+					// console.log(data);	
+					// alert(data);
+						alert('Data saved successfully!');
+					},
+					error: function() {
+						alert('Error occurred while saving data!');
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
